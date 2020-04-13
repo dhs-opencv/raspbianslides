@@ -363,21 +363,21 @@ print(x)</code>20</pre>
 							<p style="font-size: 1.1em;">Hue, Saturation and Value</p>
 					</section>
           <section>
-							<p style="font-size: 1.1em;">Though these terms might sound confusing, they are just another way of measuring color, just like rgb</p>
-              <div class="alert alert-danger fragment" role="alert">Hue represents the type of color it is.<br>i.e red < yellow < green < blue < purple < red</div>
-              <div class="alert alert-info fragment" role="alert">Saturation means how strong the color is (i.e. higher saturation means more colorful)</div>
-              <div class="alert alert-success fragment" role="alert">Value simply means how bright or dim a color is (i.e. value=0 means black, value=255 means white)</div>
+							<p style="font-size: 0.8em;">Though these terms might sound confusing, they are just another way of measuring color, just like rgb</p>
+              <div style="font-size: 0.9em;" class="alert alert-danger fragment" role="alert">Hue represents the type of color it is.<br>i.e red < yellow < green < blue < purple < red</div>
+              <div style="font-size: 0.9em;" class="alert alert-info fragment" role="alert">Saturation means how strong the color is (i.e. higher saturation means more colorful)</div>
+              <div style="font-size: 0.9em;" class="alert alert-success fragment" role="alert">Value simply means how bright or dim a color is (i.e. value=0 means black, value=255 means white)</div>
 					</section>
 					<section data-transition="slide-in zoom-out">
 						<img src="https://www.poetry4kids.com/wp-content/uploads/2016/07/i-raised-my-hand-in-class.png"></img>
 						<p style="font-size: 1.1em;">You might say</p>
 						<div class="alert alert-danger fragment" role="alert">I can't seem to visualize the HSV colorspace though</div>
-						<div class="alert alert-info fragment" role="alert">That's whats a trackbar is for!</div>
+						<div class="alert alert-info fragment grow" role="alert">That's whats a trackbar is for!</div>
 					</section>
 					<section>
 						<div class="alert alert-danger" role="alert">Why do we need to create a trackbar? What can a trackbar do?</div>
 						<p style="font-size: 0.7em;" class="fragment">OpenCV has many features which allows for greater user-experience and interface.</p>
-						<p class="alert alert-success fragment">Let's have a more interactive experience by exploring HSV colorspace on our webcam live</p>
+						<p class="alert alert-success fragment highlight-current-blue">Let's have a more interactive experience by exploring HSV colorspace on our webcam live</p>
 					</section>
 					<section>
 						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.createTrackbar(TrackbarName, WindowName, InitialPosition(Optional))
@@ -389,22 +389,26 @@ print(x)</code>20</pre>
 
 					</section>
 					<section>
-						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.getTrackbarPos(Name of Trackbar, Window Name)
+						<pre><code class="language-python fragment fade-up" style="white-space: pre-line;">cv2.getTrackbarPos(Name of Trackbar, Window Name)
 						</code></pre>
-						<pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment">Getting the values set by user<ul></pre>
-						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+						<pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment fade-up">Getting the values set by user<ul></pre>
+						<pre><code class="language-python fragment fade-up" style="white-space: pre-line;">cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 						</code></pre>
-						<pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment">Converting frame from BGR to HSV for processing<ul></pre>
+						<pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment fade-up">Converting frame from BGR to HSV for processing<ul></pre>
 						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.inRange(frame, lower_bound (array), high_bound(array))
 						</code></pre>
 						<pre style='background-color: #e6ccff; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment">Check if array elements lie between two other arrays, low and high<ul></pre>
 						<pre style='background-color: #cc99ff; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment">Make sure to use np.array() to create the arrays beforehand<ul></pre>
 						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.bitwise_and(frame, frame, mask=mask)
 						</code></pre>
-						<pre style='background-color: #666699; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap; color:#fff'  class="fragment">Bitwise Conjunction of two arrays<ul></pre>
-						
+						<pre style='background-color: #666699; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap; color:#fff'  class="fragment grow">Bitwise Conjunction of two arrays?<ul></pre>
 					</section>
+					<section data-background-iframe="https://www.tutorialgateway.org/python-bitwise-operators/" data-background-interactive>
+            <div style="position: relative; left:80%; width: 30%; background-color: rgb(0, 153, 51); color: rgb(255,255,255); padding: 6px; text-align: center; border-radius: 24px; font-weight:bold;">
+              <p style="font-size:0.9em">Bitwise AND</p>
 					
+					</section>
+
 				</section>
 
         <!--HISTOGRAM EXPLAINED-->
@@ -678,7 +682,7 @@ Documentation shows the function parameters
         <section>
           <section>What you have learnt as of now</section>
           <!--https://github.com/EmilyOng/lucky-->
-          <section  data-background-iframe="https://codecollab.io/@19y5c34emilyonghuiqi/Lucky" data-background-interactive></section>
+          <section  data-background-iframe="https://codecollab.io/@19y5c34emilyonghuiqi/Lucky" data-background-interactive sandbox></section>
         </section>	
 
         <!--CANNY EDGE DETECTION-->
