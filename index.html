@@ -248,7 +248,7 @@ print(x)</code>20</pre>
 				<section>
 					<section style='font-size: 1.7em; font-style: italic;'>What is Computer Vision and OpenCV? Is it a field of computer science?</section>
 					<section>
-						<div class="alert alert-danger" role="alert">Yes. It enables computers to identify and process objects in images and videos</div>
+						<div class="alert alert-success" role="alert">Yes. It enables computers to identify and process objects in images and videos</div>
 						<div class="alert alert-info" role="alert">OpenCV (Open Source Computer Vision Library) is a open source Python/C++ library containing functions to manipulate these data.</div>
             <p class="fragment">It contains more than 2500 optimized algorithms!</p>
 					</section>
@@ -339,27 +339,71 @@ print(x)</code>20</pre>
 					<section>
 					<p>First, open up the lessons Folder using Google Colab</p>
 					<img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcolab.research.google.com%2Fimg%2Fcolab_favicon_256px.png&f=1&nofb=1' width='300px'></img>
-					<p>Open Python IDLE on your computer</p>
+					<p>Also Open Python IDLE on your computer</p>
 					</section>
 					<section>
-					<p>Importing essential modules</p>
+					<p>We'll need to import essential modules which will be sued for the rest of this course</p>
 					<pre><code class="language-python" style="white-space: pre-line;">import numpy as np
 						import cv2
 						from matplotlib import pyplot as plt
 					</code></pre>
 					<pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment"> &#128712; What are these for? Not all are needed now<ul>
 						<li>Numpy is a useful mathematical library that allows us to <br/>work easier with the large array of pixel information.</li>
-						<li>cv2 contans useful functions whose algorithms are efficient in processing images and video.</li>
+						<li>cv2 or Open CV library contans useful functions whose algorithms are efficient in processing images and video.</li>
 						<li>Matplotlib is a graph-plotting library for us to better <br/>visualize data.</li></ul></pre>
 					</section>
-				<section>
-					<pre><code class="language-python" style="white-space: pre-line;">
-						cv2.createTrackbar(TrackbarName, WindowName, InitialPosition(Optional))
-					</code></pre>
-					<pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment"> &#128712; The trackbar parameter takes in multiple parameters<ul>
-						</pre>
-					
-				</section>
+					<section>
+						<p style="font-size: 0.9em;" class="fragment">Some background info</p>
+            <p style="font-size: 1.1em;" class="fragment">Colored images are made up of 3 channels - red, green and blue.</p>
+            <img src="https://geometrian.com/programming/reference/subpixelzoo/square_RGB.png" width="450" height="350" alt="RGB" >
+          </section>
+					<section>
+							<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/HSV_color_solid_cylinder_saturation_gray.png" width="600" height="450">
+							<p style="font-size: 1.1em;">OpenCV makes use of the HSV color space</p>
+							<p style="font-size: 1.1em;">Hue, Saturation and Value</p>
+					</section>
+          <section>
+							<p style="font-size: 1.1em;">Though these terms might sound confusing, they are just another way of measuring color, just like rgb</p>
+              <div class="alert alert-danger fragment" role="alert">Hue represents the type of color it is.<br>i.e red < yellow < green < blue < purple < red</div>
+              <div class="alert alert-info fragment" role="alert">Saturation means how strong the color is (i.e. higher saturation means more colorful)</div>
+              <div class="alert alert-success fragment" role="alert">Value simply means how bright or dim a color is (i.e. value=0 means black, value=255 means white)</div>
+					</section>
+					<section data-transition="slide-in zoom-out">
+						<img src="https://www.poetry4kids.com/wp-content/uploads/2016/07/i-raised-my-hand-in-class.png"></img>
+						<p style="font-size: 1.1em;">You might say</p>
+						<div class="alert alert-danger fragment" role="alert">I can't seem to visualize the HSV colorspace though</div>
+						<div class="alert alert-info fragment" role="alert">That's whats a trackbar is for!</div>
+					</section>
+					<section>
+						<div class="alert alert-danger" role="alert">Why do we need to create a trackbar? What can a trackbar do?</div>
+						<p style="font-size: 0.7em;" class="fragment">OpenCV has many features which allows for greater user-experience and interface.</p>
+						<p class="alert alert-success fragment">Let's have a more interactive experience by exploring HSV colorspace on our webcam live</p>
+					</section>
+					<section>
+						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.createTrackbar(TrackbarName, WindowName, InitialPosition(Optional))
+						</code></pre>
+						<pre style='background-color: #adebeb; border-left: 2px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment"><img src="static/trackbar.jpg" width="850"></img><ul></pre>
+						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.VideoCapture(0)
+						</code></pre>
+						<pre style='background-color: #4db8ff; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment"> Accepting live webcam video feed<ul></pre>
+
+					</section>
+					<section>
+						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.getTrackbarPos(Name of Trackbar, Window Name)
+						</code></pre>
+						<pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment">Getting the values set by user<ul></pre>
+						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+						</code></pre>
+						<pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment">Converting frame from BGR to HSV for processing<ul></pre>
+						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.inRange(frame, lower_bound (array), high_bound(array))
+						</code></pre>
+						<pre style='background-color: #e6ccff; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment">Check if array elements lie between two other arrays, low and high<ul></pre>
+						<pre style='background-color: #cc99ff; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'  class="fragment">Make sure to use np.array() to create the arrays beforehand<ul></pre>
+						<pre><code class="language-python fragment" style="white-space: pre-line;">cv2.bitwise_and(frame, frame, mask=mask)
+						</code></pre>
+						<pre style='background-color: #666699; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap; color:#fff'  class="fragment">Bitwise Conjunction of two arrays<ul></pre>
+						
+					</section>
 					
 				</section>
 
@@ -383,18 +427,10 @@ print(x)</code>20</pre>
 					<section>
             Image intensity values range from 0 to 255,
 						<br>giving rise to a total range of 256 values
-            <img src="https://bhushanshikhare.files.wordpress.com/2015/05/histogram-legend.jpeg" align="middle">
+            <left><img src="https://bhushanshikhare.files.wordpress.com/2015/05/histogram-legend.jpeg" align="middle"></left>
+						<right><img src="https://www.mathworks.com/help/examples/matlab/win64/ColorAnalysisWithBivariateHistogramExample_06.png" width="350" height="300"  alt="Histogram"></right>
             <br>
-            Grayscale Histogram
-          </section>
-
-          <section>
-            Colored images are made up of 3 channels - red, green and blue.
-            <br>
-            <left><img src="https://geometrian.com/programming/reference/subpixelzoo/square_RGB.png" width="350" height="300" alt="RGB" ></left>
-            <right><img src="https://www.mathworks.com/help/examples/matlab/win64/ColorAnalysisWithBivariateHistogramExample_06.png" width="350" height="300"  alt="Histogram"></right>
-            <br>
-            RGB Histogram
+            Grayscale/RGB Histogram
           </section>
           
           <section data-transition="slide-in zoom-out">
@@ -722,6 +758,19 @@ Documentation shows the function parameters
 						<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_xgEM-_--PSk%2FTNqXKSX285I%2FAAAAAAAAAAY%2Fs5twK3Y07_4%2Fs1600%2F0511-1001-2519-1742_Girl_Getting_a_Pat_on_the_Back_for_a_Job_Well_Done_clipart_image.jpg&f=1&nofb=1" align="middle" alt="Pat"></img>
 						<p>Thank you! Give yourself a pat on the back</p>
 					</section>
+        </section>
+
+        <section>
+          <section>
+            <div style='font-size: 2.2em; background-color: hsl(171, 100%, 41%); border-left: 8px solid hsl(141, 53%, 53%);' class="alert alert-info" role="alert" >Final Project</div>
+						<div class="alert alert-primary">Express your creativity!</div>
+          </section>
+          <section>
+            <pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'> Your final project can be anything you imagine<br/>Think about all the things you can do with a camera</pre>
+          </section>
+          <section>
+            <pre style='background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 4px; white-space: pre-wrap;'> Your final project can be anything you imagine<br/>Think about all the things you can do with a camera</pre>
+          </section>
         </section>
 
 			</div>
